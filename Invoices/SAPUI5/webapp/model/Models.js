@@ -8,7 +8,9 @@ function (JSONModel) {
     "use strict";
 
     return {
+
         createRecipient: function() {
+
             var oData = {
                 recipient : {
                     name : "World"
@@ -16,6 +18,7 @@ function (JSONModel) {
             };
 
             return new JSONModel(oData);
+            
         }
     }
 });
