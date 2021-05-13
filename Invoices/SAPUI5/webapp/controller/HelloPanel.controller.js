@@ -3,8 +3,8 @@ sap.ui.define([
     "sap/m/MessageToast"
 ],
 /**
- * @param {typof sap.ui.core.mvc.Controller} Controller
- * @param {typof sap.m.MessageToast} MessageToast
+ * @param {typeof sap.ui.core.mvc.Controller} Controller
+ * @param {typeof sap.m.MessageToast} MessageToast
  */
 function (Controller, MessageToast) {
 

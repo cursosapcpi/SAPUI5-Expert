@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel"
 ],
 /**
- * @param {typof sap.ui.model.json.JSONModel} JSONModel
+ * @param {typeof sap.ui.model.json.JSONModel} JSONModel
  */
 function (JSONModel) {
     "use strict";
