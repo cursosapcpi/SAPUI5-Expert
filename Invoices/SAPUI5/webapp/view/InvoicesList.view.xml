@@ -14,10 +14,10 @@
         </headerToolbar>
 
         <Table id="invoiceList"
-            headerText="{i18n>invoiceListTitle}"
-            class="sapUiResponsiveMargin"
-            width="auto"
-            items="{ path: 'northwind>/Invoices',
+               headerText="{i18n>invoiceListTitle}"
+               class="sapUiResponsiveMargin"
+               width="auto"
+               items="{ path: 'northwind>/Invoices',
                         sorter: { path: 'ShipperName',
                                 group: true } }">
 
