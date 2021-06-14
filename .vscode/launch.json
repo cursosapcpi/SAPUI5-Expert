@@ -80,6 +80,26 @@
       },
       "envFile": "${workspaceFolder}/Invoices/SAPUI5/.env4",
       "preLaunchTask": "Build Invoices"
+    },
+    {
+      "name": "Run logali-Employees",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/logali/logali-approuter/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/logaligroupEmployees/index.html",
+        "--ui5",
+        "{\"version\":\".\"}"
+      ],
+      "cwd": "${workspaceFolder}/logali/Employees",
+      "env": {
+        "PORT": "6004",
+        "MOCK_LOOKUP_DIRS": "[\"webapp\"]",
+        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnableId\":\"/home/user/projects/logali/Employees\"}"
+      },
+      "envFile": "${workspaceFolder}/logali/Employees/.env1",
+      "preLaunchTask": "Build logali"
     }
   ]
 }
