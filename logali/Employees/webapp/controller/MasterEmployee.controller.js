@@ -12,26 +12,8 @@ sap.ui.define([
         "use strict";
 
         function onInit() {
-            var oView = this.getView();
-
-            var oJSONModelEmpl = new sap.ui.model.json.JSONModel;
-            oJSONModelEmpl.loadData("./localService/mockdata/Employees.json", false);
-            oView.setModel(oJSONModelEmpl, "jsonEmployees");
-
-            var oJSONModelCountries = new sap.ui.model.json.JSONModel;
-            oJSONModelCountries.loadData("./localService/mockdata/Countries.json", false);
-            oView.setModel(oJSONModelCountries, "jsonCountries");
-
-            var oJSONModelConfig = new sap.ui.model.json.JSONModel({
-                visibleID: true,
-                visibleName: true,
-                visibleCountry: true,
-                visibleCity: false,
-                visibleBtnShowCity: true,
-                visibleBtnHideCity: false,
-            });
-            oView.setModel(oJSONModelConfig, "jsonModelConfig");
-        }
+            this._bus = sap.ui.getCore().getEventBus();
+        };
 
         function onFilter() {
             var oJSONCountries = this.getView().getModel("jsonCountries").getData();
@@ -49,13 +31,13 @@ sap.ui.define([
             var oList = this.getView().byId("tableEmployee");
             var oBinding = oList.getBinding("items");
             oBinding.filter(filters);
-        }
+        };
 
         function onClearFilter() {
             var oModel = this.getView().getModel("jsonCountries");
             oModel.setProperty("/EmployeeId", "");
             oModel.setProperty("/CountryKey", "");
-        }
+        };
 
         function onShowCity() {
             var oJSONModelConfig = this.getView().getModel("jsonModelConfig");
@@ -63,7 +45,7 @@ sap.ui.define([
             oJSONModelConfig.setProperty("/visibleCity", true);
             oJSONModelConfig.setProperty("/visibleBtnShowCity", false);
             oJSONModelConfig.setProperty("/visibleBtnHideCity", true);
-        }
+        };
 
         function onHideCity() {
             var oJSONModelConfig = this.getView().getModel("jsonModelConfig");
@@ -71,7 +53,7 @@ sap.ui.define([
             oJSONModelConfig.setProperty("/visibleCity", false);
             oJSONModelConfig.setProperty("/visibleBtnShowCity", true);
             oJSONModelConfig.setProperty("/visibleBtnHideCity", false);
-        }
+        };
 
         function showOrders(oEvent) {
             // Get selected controller.
@@ -88,13 +70,18 @@ sap.ui.define([
             // Dialog binding to the Context to have access to the data of selected item.
             this._oDialogOrders.bindElement("jsonEmployees>" + oContext.getPath());
             this._oDialogOrders.open();
-        }
+        };
 
         function onCloseOrders () {
             this._oDialogOrders.close();
-        }
+        };
 
-        var Main = Controller.extend("logaligroup.Employees.controller.MainView", {});
+        function showEmployee (oEvent) {
+            var path = oEvent.getSource().getBindingContext("jsonEmployees").getPath();
+            this._bus.publish("flexible", "showEmployee", path);
+        };
+
+        var Main = Controller.extend("logaligroup.Employees.controller.MasterEmployee", {});
 
         Main.prototype.onInit = onInit;
         Main.prototype.onFilter = onFilter;
@@ -103,6 +90,7 @@ sap.ui.define([
         Main.prototype.onHideCity = onHideCity;
         Main.prototype.showOrders = showOrders;
         Main.prototype.onCloseOrders = onCloseOrders;
+        Main.prototype.showEmployee = showEmployee;
 
         return Main;
 
