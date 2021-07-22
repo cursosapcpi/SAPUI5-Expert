@@ -1,4 +1,0 @@
-#2.0#2021 07 22 23:33:28.813#Z#DEBUG#com.sap.cloud.lm.sl.xs2.ec5be1d0-eb44-11eb-a1c5-eeee0a8eb6c4.logali_ui_deployer_logali_html_repo_host.startContentDeployTask#
-######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-16340###
-[PollDeployContentStatusExecution] [logali_ui_deployer] [INFO] Application content was successfully uploaded { CODE: '1002' }#
-
