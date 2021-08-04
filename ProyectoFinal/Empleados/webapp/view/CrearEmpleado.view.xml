@@ -1,0 +1,123 @@
+<mvc:View controllerName="protech.Empleados.controller.CrearEmpleado"
+          displayBlock="true"
+          xmlns:mvc="sap.ui.core.mvc" 
+          xmlns="sap.m"
+          xmlns:f="sap.ui.layout.form"
+          xmlns:core="sap.ui.core">
+
+    <NavContainer id="wizardNavContainer">
+        <Page id="paginaWizard" title="{i18n>crearEmpleado}">
+            <content>
+                <Wizard id="wizardEmpleado">
+                    <WizardStep id="primerPaso" title="{i18n>tipoEmpleado}" validated="false">
+                        <MessageStrip text="{i18n>tipoEmpleadoStrip}" showIcon="true"/>
+
+                        <HBox alignItems="Center" justifyContent="Center" width="100%">
+                            <Button text="{i18n>btnInterno}" class="sapUiSmallMarginEnd sapUiSmallMarginTop" press="onInterno"/>
+                            <Button text="{i18n>btnAutonomo}" class="sapUiSmallMarginEnd sapUiSmallMarginTop" press="onAutonomo"/>
+                            <Button text="{i18n>btnGerente}" class="sapUiSmallMarginEnd sapUiSmallMarginTop" press="onGerente"/>
+                        </HBox>
+                    </WizardStep>
+
+                    <WizardStep id="segundoPaso" title="{i18n>datosEmpleado}" validated="false">
+                        <MessageStrip text="{i18n>datosEmpleadoStrip}" showIcon="true"/>
+
+                        <Panel id="panelSegundoPaso">
+                        </Panel>
+                    </WizardStep>
+
+                    <WizardStep id="tercerPaso" title="{i18n>infoAdicional}" complete="onWizardCompletado">
+                        <MessageStrip text="{i18n>infoAdicionalStrip}" showIcon="true"/>
+
+                        <VBox>
+                            <Label text="{i18n>comentario}" labelFor="textComentario" class="sapUiSmallMarginTop"/>
+                            <TextArea id="textComentario" width="100%" value="{jsonEmployee>/Comments}"/>
+                        </VBox>
+
+                        <UploadCollection id="uploadCollection"
+                                          maximumFilenameLength="55"
+                                          maximumFileSize="10"
+                                          multiple="true"
+                                          sameFilenameAllowed="true"
+                                          instantUpload="false"
+                                          uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments"
+                                          filenameLengthExceed="onFilenameLengthExceed"
+                                          fileSizeExceed="onFileSizeExceed"
+                                          change="onChange"
+                                          uploadComplete="onUploadComplete"
+                                          beforeUploadStarts="onBeforeUpload"
+                                          fileDeleted="onFileDeleted"/>
+                    </WizardStep>
+                </Wizard>
+            </content>
+
+            <footer>
+                <Toolbar>
+                    <ToolbarSpacer/>
+                    <Button text="{i18n>btnCancelar}" press="onCancelar"/>
+                </Toolbar>
+            </footer>
+        </Page>
+
+        <Page id="paginaResumen" title="{i18n>resumen}">
+            <content>
+                <f:SimpleForm title="{i18n>tituloResTipo}"
+                              editable="false"
+                              layout="ResponsiveGridLayout">
+                    <f:content>
+                        <Label text="{i18n>tipoEmpleado}"/>
+                        <Text text="{= ${jsonEmployee>/Type} === '0' ? ${i18n>btnInterno} : 
+                                       ${jsonEmployee>/Type} === '1' ? ${i18n>btnAutonomo} : ${i18n>btnGerente}}"/>
+
+                        <Link press="editarPrimerPaso" text="Editar"/>
+                    </f:content>
+                </f:SimpleForm>
+
+                <f:SimpleForm title="{i18n>tituloResDatos}"
+                              editable="false"
+                              layout="ResponsiveGridLayout">
+                    <f:content>
+                        <Label text="{i18n>nombre}"/>
+                        <Text text="{jsonEmployee>/FirstName}"/>
+
+                        <Label text="{i18n>apellidos}"/>
+                        <Text text="{jsonEmployee>/LastName}"/>
+
+                        <Label text="{= ${jsonEmployee>/Type} === '1' ? ${i18n>cif} : ${i18n>dni}}"/>
+                        <Text text="{jsonEmployee>/Dni}"/>
+
+                        <Label text="{= ${jsonEmployee>/Type} === '1' ? ${i18n>precioDiario} : ${i18n>salarioBruto}}"/>
+                        <Text text="{jsonEmployee>/Amount}"/>
+
+                        <Label text="{i18n>fechaIncorporacion}"/>
+                        <Text text="{path: 'jsonEmployee>/CreationDate', formatter: '.Formatter.formatearFecha'}"/>
+                        
+                        <Link press="editarSegundoPaso" text="Editar"/>
+                    </f:content>
+                </f:SimpleForm>
+
+                <f:SimpleForm title="{i18n>tituloResInfo}"
+                              editable="false"
+                              layout="ResponsiveGridLayout">
+                    <f:content>
+                        <Label text="{i18n>comentario}"/>
+                        <Text text="{jsonEmployee>/Comments}"/>
+
+                        <Label text="{i18n>documentos}"/>
+                        <Text text="{jsonEmployee>/Attachments}"/>
+
+                        <Link press="editarTercerPaso" text="Editar"/>
+                    </f:content>
+                </f:SimpleForm>
+            </content>
+
+            <footer>
+                <Toolbar>
+                    <ToolbarSpacer/>
+                    <Button text="{i18n>btnGuardar}" press="onGuardar"/>
+                    <Button text="{i18n>btnCancelar}" press="onCancelar"/>
+                </Toolbar>
+            </footer>
+        </Page>
+    </NavContainer>
+</mvc:View>

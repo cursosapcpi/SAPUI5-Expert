@@ -5,30 +5,6 @@
 
 	<Shell id="shell">
 		<App id="app">
-			<pages>
-				<Page id="page" title="{i18n>title}">
-					<content>
-                        <Panel headerText="{i18n>empleados}" expandable="true" expanded="true">
-                            <GenericTile headerImage="sap-icon://add-employee" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
-                                <TileContent footer="{i18n>crearEmpleado}">
-                                </TileContent>
-                            </GenericTile>
-
-                            <GenericTile headerImage="sap-icon://employee-lookup" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
-                                <TileContent footer="{i18n>verEmpleados}">
-                                </TileContent>
-                            </GenericTile>
-                        </Panel>
-
-                        <Panel headerText="{i18n>pedidos}" expandable="true" expanded="true">
-                            <GenericTile headerImage="sap-icon://signature" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
-                                <TileContent footer="{i18n>firmarPedido}">
-                                </TileContent>
-                            </GenericTile>
-                        </Panel>
-                    </content>
-				</Page>
-			</pages>
 		</App>
 	</Shell>
 

@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+                         xmlns="sap.m"
+                         xmlns:f="sap.ui.layout.form">
+
+    <VBox>
+        <f:SimpleForm editable="true">
+            <f:content>
+                <Label text="{i18n>nombre}" required="true"/>
+                <Input id="inputNombre" value="{jsonEmployee>/FirstName}" valueState="{jsonLayout>/NombreValueState}" liveChange="validarDatosForm"/>
+
+                <Label text="{i18n>apellidos}" required="true"/>
+                <Input id="inputApellidos" value="{jsonEmployee>/LastName}" valueState="{jsonLayout>/ApellidosValueState}" liveChange="validarDatosForm"/>
+
+                <Label text="{i18n>dni}" required="true"/>
+                <Input id="inputDni" value="{jsonEmployee>/Dni}" valueState="{jsonLayout>/DniValueState}" liveChange="validarDatosForm"/>
+
+                <Label text="{i18n>salarioBruto}"/>
+                <Slider enableTickmarks="true" progress="false" step="1000" value="{jsonEmployee>/Amount}" min="50000" max="200000" class="sapUiMediumMarginBottom" width="100%"/>
+
+                <Label text="{i18n>fechaIncorporacion}" required="true"/>
+                <DatePicker id="inputFecha" dateValue="{jsonEmployee>/CreationDate}" valueState="{jsonLayout>/FechaValueState}" change="validarDatosForm"/>
+            </f:content>
+        </f:SimpleForm>
+    </VBox>
+
+</core:FragmentDefinition>
