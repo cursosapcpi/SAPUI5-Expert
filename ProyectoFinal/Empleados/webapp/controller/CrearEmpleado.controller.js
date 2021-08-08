@@ -58,26 +58,30 @@ sap.ui.define([
                     title: oI18n.getText("tituloConfirmar"),
                     onClose: function onCloseConfirm(oAction) {
                         if (oAction === MessageBox.Action.OK) {
-                            this._volverAlWizard();
-                            this._wizard.discardProgress(this._wizard.getSteps()[0]);
-                            this._wizard.invalidateStep(this.byId("primerPaso"));
-
-                            this._inicializarLayoutModel();
-                            
-                            var oUploadCollection = this.byId("uploadCollection");
-                            oUploadCollection.destroyItems();
-
-                            var sPreviousHash = History.getInstance().getPreviousHash();
-
-                            if (sPreviousHash !== undefined) {
-                                window.history.go(-1);
-                            } else {
-                                var oRouter = UIComponent.getRouterFor(this);
-                                oRouter.navTo("RouteApp", true);
-                            };
+                            this._salirAlMenu();
                         };
                     }.bind(this)
                 });
+            },
+
+            _salirAlMenu: function() {
+                this._volverAlWizard();
+                this._wizard.discardProgress(this._wizard.getSteps()[0]);
+                this._wizard.invalidateStep(this.byId("primerPaso"));
+
+                this._inicializarLayoutModel();
+                
+                var oUploadCollection = this.byId("uploadCollection");
+                oUploadCollection.destroyItems();
+
+                var sPreviousHash = History.getInstance().getPreviousHash();
+
+                if (sPreviousHash !== undefined) {
+                    window.history.go(-1);
+                } else {
+                    var oRouter = UIComponent.getRouterFor(this);
+                    oRouter.navTo("RouteApp", true);
+                };
             },
 
             onInterno: function (oEvent) {
@@ -280,12 +284,10 @@ sap.ui.define([
             },
 
             onBeforeUpload: function(oEvent) {
-                var objContext = oEvent.getSource().getBindingContext("employeesModel").getObject();
-
                 // Header Slug
                 var oCustomerHeaderSlug = new sap.m.UploadCollectionParameter({
                     name: "slug",
-                    value: this.getOwnerComponent().SapId + ";" + objContext.EmployeeId + ";" + oEvent.getParameter("fileName")
+                    value: this.getOwnerComponent().SapId + ";" + this._employeeId + ";" + oEvent.getParameter("fileName")
                 });
 
                 oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
@@ -324,20 +326,24 @@ sap.ui.define([
                 };
 
                 this.getView().getModel("employeesModel").create("/Users", body, {
-                    success: function () {
+                    success: function (oData, response) {
                         sap.m.MessageToast.show(oI18n.getText("usersGuardadoOK"));
+
+                        var oUploadCollection = this.byId("uploadCollection");
+                        var sFiles = oUploadCollection.getItems().length;
+
+                        if (sFiles > 0) {
+                            this._employeeId = oData.EmployeeId;
+                            oUploadCollection.upload();
+                        };
+
+                        this._salirAlMenu();
                     }.bind(this),
-                    error: function (e) {
+
+                    error: function (oError) {
                         sap.m.MessageToast.show(oI18n.getText("usersGuardadoKO"));
                     }.bind(this)
                 });
-
-                // var oUploadCollection = this.byId("uploadCollection");
-                // var cFiles = oUploadCollection.getItems().length;
-
-                // if (cFiles > 0) {
-                //     oUploadCollection.upload();
-                // }
             }
         });
     });
