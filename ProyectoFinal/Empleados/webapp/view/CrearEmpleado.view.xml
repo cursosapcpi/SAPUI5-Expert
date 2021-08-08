@@ -104,7 +104,14 @@
                         <Text text="{jsonEmployee>/Comments}"/>
 
                         <Label text="{i18n>documentos}"/>
-                        <Text text="{jsonEmployee>/Attachments}"/>
+
+                        <VBox>
+                            <Text text="{jsonEmployee>/Attachments}"/>
+
+                            <List items="{jsonEmployee>/AttachmentsList}" class="sapUiTinyMarginTop">
+                                <StandardListItem title="{jsonEmployee>FileName}"/>
+                            </List>
+                        </VBox>
 
                         <Link press="editarTercerPaso" text="Editar"/>
                     </f:content>

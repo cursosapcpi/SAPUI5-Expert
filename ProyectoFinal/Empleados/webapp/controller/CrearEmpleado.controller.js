@@ -45,7 +45,8 @@ sap.ui.define([
                     "Amount": 0,
                     "CreationDate": null,
                     "Comments": "",
-                    "Attachments": ""
+                    "Attachments": "",
+                    "AttachmentsList": []
                 });
                 this.getView().setModel(this.jsonEmployee, "jsonEmployee");
             },
@@ -179,13 +180,23 @@ sap.ui.define([
             },
 
             onWizardCompletado: function () {
-                let oUploadCollection = this.byId("uploadCollection");
-                let sFicheros = oUploadCollection.getItems().length + " Ficheros";
-                this.jsonEmployee.setProperty("/Attachments", sFicheros);
-
                 if (this.byId("segundoPaso").getProperty("validated") === false) {
                     MessageBox.error("Corrija los errores antes de continuar.");
                 } else {
+                    let oUploadCollection = this.byId("uploadCollection");
+                    let sFicheros = oUploadCollection.getItems().length + " Ficheros";
+                    this.jsonEmployee.setProperty("/Attachments", sFicheros);
+
+                    var items = oUploadCollection.getItems();
+                    this.jsonEmployee.setProperty("/AttachmentsList", []);
+
+                    for (let i = 0; i < items.length; i++) {
+                        let sFileName = items[i].getProperty("fileName");
+                        this.jsonEmployee.getProperty("/AttachmentsList").push({FileName: sFileName});
+                    }
+
+                    this.jsonEmployee.refresh();
+
                     this._oNavContainer.to(this.byId("paginaResumen"));
                 };
             },
