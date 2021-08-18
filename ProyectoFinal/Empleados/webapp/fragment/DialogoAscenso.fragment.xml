@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core">
+
+    <Dialog title="{i18n>nuevoAscenso}">
+        <VBox class="sapUiSmallMargin">
+            <Label text="{i18n>salarioDial}"/>
+            <Input value="{jsonAscenso>/Ammount}" type="Number"/>
+            <Label text="{i18n>fechaDial}" class="sapUiSmallMarginTop"/>
+            <DatePicker dateValue="{jsonAscenso>/CreationDate}"/>
+            <Label text="{i18n>comentarioDial}" class="sapUiSmallMarginTop"/>
+            <TextArea value="{jsonAscenso>/Comments}" width="100%"/>
+        </VBox>
+
+        <beginButton>
+            <Button text="{i18n>aceptarDial}" press="onAceptarAscenso"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>cancelarDial}" press="onCancelarAscenso"/>
+        </endButton>
+    </Dialog>
+
+</core:FragmentDefinition>

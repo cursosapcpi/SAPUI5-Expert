@@ -25,6 +25,11 @@ sap.ui.define([
             toCrearEmpleado: function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("RouteCrearEmpleado");
+            },
+
+            toVerEmpleados: function () {
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("RouteVerEmpleados");
             }
         });
     });

@@ -114,6 +114,13 @@
                     "target": [
                         "TargetCrearEmpleado"
                     ]
+                },
+                {
+                    "name": "RouteVerEmpleados",
+                    "pattern": "RouteVerEmpleados",
+                    "target": [
+                        "TargetVerEmpleados"
+                    ]
                 }
             ],
             "targets": {
@@ -127,6 +134,10 @@
                 "TargetCrearEmpleado": {
                     "viewType": "XML",
                     "viewName": "CrearEmpleado"
+                },
+                "TargetVerEmpleados": {
+                    "viewType": "XML",
+                    "viewName": "VerEmpleados"
                 }
             }
         }

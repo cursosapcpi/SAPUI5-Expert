@@ -1,0 +1,26 @@
+<mvc:View controllerName="protech.Empleados.controller.MaestroEmpleados"
+          displayBlock="true"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:f="sap.f"
+          xmlns:core="sap.ui.core">
+
+    <Page showHeader="false">
+        <content>
+            <Toolbar class="sapUiTinyMarginTop">
+                <Button icon="sap-icon://nav-back" press="onBack"/>
+                <SearchField placeholder="Buscar" liveChange="onSearch"/>
+            </Toolbar>
+
+            <List id="listaEmpleados" items="{employeesModel>/Users}">
+                <items>
+                    <StandardListItem title="{employeesModel>FirstName} {employeesModel>LastName}"
+                                      description="{employeesModel>Dni}"
+                                      type="Navigation"
+                                      press="mostrarDetalles"/>
+                </items>
+            </List>
+        </content>
+    </Page>
+
+</mvc:View>

@@ -1,0 +1,22 @@
+<mvc:View controllerName="protech.Empleados.controller.VerEmpleados"
+          displayBlock="true"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:f="sap.f"
+          xmlns:core="sap.ui.core">
+
+    <Page showHeader="false">
+        <content>
+            <f:FlexibleColumnLayout layout="TwoColumnsMidExpanded">
+                <f:beginColumnPages>
+                    <mvc:XMLView id="vistaMaestroEmpleados" viewName="protech.Empleados.view.MaestroEmpleados"/>
+                </f:beginColumnPages>
+
+                <f:midColumnPages>
+                    <mvc:XMLView id="vistaDetallesEmpleado" viewName="protech.Empleados.view.DetallesEmpleado"/>
+                </f:midColumnPages>
+            </f:FlexibleColumnLayout>
+        </content>
+    </Page>
+
+</mvc:View>

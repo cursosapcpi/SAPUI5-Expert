@@ -44,9 +44,7 @@
                                           filenameLengthExceed="onFilenameLengthExceed"
                                           fileSizeExceed="onFileSizeExceed"
                                           change="onChange"
-                                          uploadComplete="onUploadComplete"
-                                          beforeUploadStarts="onBeforeUpload"
-                                          fileDeleted="onFileDeleted"/>
+                                          beforeUploadStarts="onBeforeUpload"/>
                     </WizardStep>
                 </Wizard>
             </content>

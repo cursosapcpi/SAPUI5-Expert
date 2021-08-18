@@ -1,0 +1,114 @@
+<mvc:View controllerName="protech.Empleados.controller.DetallesEmpleado"
+          displayBlock="true"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:f="sap.f"
+          xmlns:core="sap.ui.core"
+          xmlns:com="sap.suite.ui.commons">
+    
+    <NavContainer id="detallesNavContainer">
+        <Page id="paginaInicial" showHeader="false">
+            <content>
+                <FlexBox width="100%" height="100%" alignItems="Center" justifyContent="Center">
+                    <items>
+                        <Text text="{i18n>seleccioneEmpleado}"/>
+                    </items>
+                </FlexBox>
+            </content>
+        </Page>
+
+        <Page id="paginaDetalles" title="{i18n>detalleEmpleado}">
+            <content>
+                <HBox>
+                    <core:Icon src="{= ${employeesModel>Type} === '0' ? 'sap-icon://employee-pane' :
+                                       ${employeesModel>Type} === '1' ? 'sap-icon://employee' : 'sap-icon://leads'}"
+                               size="50px"
+                               color="#346187"
+                               class="sapUiSmallMargin"/>
+
+                    <VBox>
+                        <Text text="{employeesModel>FirstName} {employeesModel>LastName}" class="estiloNombre sapUiSmallMarginTop"/>
+                        <Text text="{employeesModel>Dni}" class="sapUiTinyMarginTop"/>
+                    </VBox>
+                </HBox>
+
+                <VBox class="sapUiSmallMargin">
+                    <HBox>
+                        <FlexBox width="50%" justifyContent="Start">
+                            <items>
+                                <Label text="{i18n>fechaIncorporacionDet}"/>
+                                <Text text="{path: 'employeesModel>CreationDate', formatter: '.Formatter.formatearFecha'}" class="sapUiTinyMarginBegin"/>
+                            </items>
+                        </FlexBox>
+
+                        <FlexBox width="50%" justifyContent="End">
+                            <items>
+                                <Label text="{i18n>comentarioDet}"/>
+                                <Text text="{employeesModel>Comments}" class="sapUiTinyMarginBegin"/>
+                            </items>
+                        </FlexBox>
+                    </HBox>
+
+                    <HBox class="sapUiTinyMarginTop">
+                        <Label text="{i18n>tipoDet}"/>
+                        <Text text="{= ${employeesModel>Type} === '0' ? ${i18n>btnInterno} :
+                                       ${employeesModel>Type} === '1' ? ${i18n>btnAutonomo} :
+                                       ${employeesModel>Type} === '2' ? ${i18n>btnGerente} : ''}"
+                              class="sapUiTinyMarginBegin"/>
+                    </HBox>
+                </VBox>
+
+                <IconTabBar class="sapUiSmallMarginTop">
+                    <items>
+                        <IconTabFilter icon="sap-icon://attachment"
+                                       text="{i18n>ficheros}">
+                            <UploadCollection id="uploadCollectionDet"
+                                              maximumFilenameLength="55"
+                                              maximumFileSize="10"
+                                              multiple="true"
+                                              sameFilenameAllowed="true"
+                                              instantUpload="true"
+                                              uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments"
+                                              filenameLengthExceed="onFilenameLengthExceed"
+                                              fileSizeExceed="onFileSizeExceed"
+                                              change="onChange"
+                                              uploadComplete="onUploadComplete"
+                                              beforeUploadStarts="onBeforeUpload"
+                                              fileDeleted="onFileDeleted"/>
+                        </IconTabFilter>
+
+                        <IconTabFilter icon="sap-icon://money-bills"
+                                       text="{i18n>historial}">
+
+                            <com:Timeline id="timeline"
+                                          content="{employeesModel>/Salaries}"
+                                          showHeaderBar="false"
+                                          enableScroll="false"
+                                          enableDoubleSided="true"
+                                          width="100%"
+                                          height="100%"
+                                          groupBy="CreationDate"
+                                          groupByType="Year">
+                                <com:content>
+                                    <com:TimelineItem icon="sap-icon://circle-task"
+                                                      dateTime="{employeesModel>CreationDate}"
+                                                      title="{employeesModel>Ammount}"
+                                                      text="{employeesModel>Comments}">
+                                    </com:TimelineItem>
+                                </com:content>
+                            </com:Timeline>
+
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </content>
+            <footer>
+                <Toolbar>
+                    <ToolbarSpacer/>
+                    <Button text="Dar de Baja" press="onDarDeBaja"/>
+                    <Button text="Ascender" press="onAscender"/>
+                </Toolbar>
+            </footer>
+        </Page>
+    </NavContainer>
+</mvc:View>

@@ -337,7 +337,15 @@ sap.ui.define([
                             oUploadCollection.upload();
                         };
 
-                        this._salirAlMenu();
+                        // Volver a la screen inicial del wizard.
+                        this._volverAlWizard();
+                        this._wizard.discardProgress(this._wizard.getSteps()[0]);
+                        this._wizard.invalidateStep(this.byId("primerPaso"));
+
+                        this._inicializarLayoutModel();
+                        
+                        var oUploadCollection = this.byId("uploadCollection");
+                        oUploadCollection.destroyItems();
                     }.bind(this),
 
                     error: function (oError) {
