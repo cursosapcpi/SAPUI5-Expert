@@ -39,7 +39,7 @@ sap.ui.define([
                 if (sQuery && sQuery.length > 0) {
                     var oFiltro = new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId);
                     aFiltros.push(oFiltro);
-                    var oFiltro = new Filter("FirstName", FilterOperator.StartsWith, sQuery);
+                    var oFiltro = new Filter("FirstName", FilterOperator.EQ, sQuery);
                     aFiltros.push(oFiltro);
                 } else {
                     var oFiltro = new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId);

@@ -9,7 +9,7 @@
         <content>
             <Toolbar class="sapUiTinyMarginTop">
                 <Button icon="sap-icon://nav-back" press="onBack"/>
-                <SearchField placeholder="Buscar" liveChange="onSearch"/>
+                <SearchField placeholder="Buscar" search="onSearch"/>
             </Toolbar>
 
             <List id="listaEmpleados" items="{employeesModel>/Users}">
