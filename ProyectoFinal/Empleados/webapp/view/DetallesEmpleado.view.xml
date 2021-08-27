@@ -68,7 +68,7 @@
                                               multiple="true"
                                               sameFilenameAllowed="true"
                                               instantUpload="true"
-                                              uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments"
+                                              uploadUrl="sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments"
                                               filenameLengthExceed="onFilenameLengthExceed"
                                               fileSizeExceed="onFileSizeExceed"
                                               change="onChange"
